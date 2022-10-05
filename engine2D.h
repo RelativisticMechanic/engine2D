@@ -844,6 +844,7 @@ namespace engine2D
     
     void Start(Application* appl)
     {
+        UncaptureMouse();
         app = appl;
         app->Create();
         SDL_SetWindowTitle(application_window, app->app_name.c_str());
@@ -868,6 +869,7 @@ namespace engine2D
             app->Update(elapsed);
             // Render
             SDL_SetRenderTarget(window_renderer, screen_texture);
+            _SetDrawColor(0, 0, 0, 255);
             SDL_RenderClear(window_renderer);
             // Drawing code goes here
             app->Draw(elapsed);
@@ -936,7 +938,7 @@ namespace engine2D
                 if(x == window_width / 2 && y == window_height / 2)
                     continue;
                 app->OnMouseMove(elapsed, x / window_scale, y / window_scale, e.motion.xrel, e.motion.yrel);
-                SDL_WarpMouseInWindow(application_window, x, y);
+                //SDL_WarpMouseInWindow(application_window, x, y);
             }
             else if(e.type == SDL_TEXTINPUT)
             {
